@@ -1,9 +1,9 @@
-AntiSocial : A political webgame
+* AntiSocial : A political webgame
 
-* Summary
+** Summary
 
-* Technology
+** Technology
 
-* People
+** People
 
-* Thanks
+** Thanks
