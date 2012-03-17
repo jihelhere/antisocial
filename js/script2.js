@@ -2,6 +2,8 @@ $(function() {
 
   var propos = [];
   var candis = [];
+  var propositionRead = 0;
+
 
   var id_candidacies = ['4f1ec52e6e27d70001000007',
     '4f1eddf96e27d7000100008b',
@@ -107,16 +109,21 @@ $(function() {
   //---------------------
   //---------------------
 
-  $.getJSON(url, function(data) {
-    if (data.query.results) {
-      for (var i = 0; i < 500; i++) {
-        propos[i] = data.query.results.propositions[i].text;
-        candis[i] = data.query.results.propositions[i].candidacy.id;
-      };
-    }
-  });
+    $.ajaxSetup({'async': false});
 
-  var iRandom = Math.floor(Math.random());
+    $.getJSON(url, function(data) {
+        if (data.query.results) {
+            for (var i = 0; i < 500; i++) {
+                propos[i] = data.query.results.propositions[i].text;
+                candis[i] = data.query.results.propositions[i].candidacy.id;
+            };
+            propositionRead = 1;
+        }
+    });
+
+
+    var iRandom = Math.floor(Math.random()*501);
+    console.log(propos[iRandom]);
 
   // On envoie une proposition : propos[iRandom]
   // Si il répond oui, on incrémente un tableau associatif : tab[candis[iRandom]]++
