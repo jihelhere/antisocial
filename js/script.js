@@ -1,5 +1,6 @@
 var currentId = 0;
 var inc = 0;
+
 function showLoader(show){
 	if (!show){
 		$(".spinner").animate({"margin-top": "-=400px"},{duration:500, easing:"easeInElastic",queue:true, complete:function(){
@@ -26,7 +27,7 @@ function showLoader(show){
 	  left: 'auto'
 	};
 	var spinner = new Spinner(opts).spin();
-	$("body").append(spinner.el);
+	$("body").prepend(spinner.el);
 	$(spinner.el).css("position","absolute");
 	$(spinner.el).css("width","0px");
 	$(spinner.el).css("margin","auto");
@@ -62,7 +63,7 @@ function show(p){
 	proposition.css("color","#FFFFFF");		
 	proposition.attr("id",p.id);
 	
-	$("body").append(proposition);
+	$("body").prepend(proposition);
 		$("#"+p.id).animate({"left": "+=2000px"},{duration:1500, easing:"easeInOutElastic",queue:false, complete:function(){
 	}}).delay(1000);
 }
