@@ -712,10 +712,6 @@ a.thumbnail:hover{border-color:#0088cc;-webkit-box-shadow:0 1px 4px rgba(0, 105,
 	border-radius: 10px;
 	border-bottom: 1px solid #9C9B9B;
 	border-top: none;
-	-moz-box-shadow: inset 4px 0px 9px 0px #f13062;
-	-webkit-box-shadow: inset 4px 0px 9px 0px #f13062;
-	-o-box-shadow: inset 4px 0px 9px 0px #f13062;
-	box-shadow: inset 4px 0px 9px 0px #f13062;
 	display:block;
 	text-align:center;
 	width:190px;
