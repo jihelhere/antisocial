@@ -38,34 +38,22 @@ function showLoader(show){
 };
 
 function getNextProp(){
-	inc++;
+	currentId ++;
 	return {
-	text : "lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet ",
-	id : ""+inc
+		text : "lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet ",
+		id : currentId,
 	};
 }
 
-function hide(id){
-    	$("#"+id).animate({"left": "+=2000px"},{duration:500, easing:"easeInOutElastic",queue:false, complete:function(){
-			$("#"+id).remove();
-		}});
-		return;
-}
-
 function show(p){
-	var proposition = $('<div id="'+p.id+'"><div style="padding:50px">'+p.text+'</div></div>');
-	proposition.css("font-size","70px");
-	proposition.css("width","100%");
-	proposition.css("line-height","70px");
-	proposition.css("margin-left","-2000px");
-	proposition.css("position","absolute");	
-	proposition.css("text-shadow","1px 1px 7px #333");	
-	proposition.css("color","#FFFFFF");		
-	proposition.attr("id",p.id);
+	var proposition = $('<div id="'+p.id+'" class="proposition"><p>'+p.text+'</p></div>');
+	proposition.css({left:-$(window).width()-50});
+	// proposition.css('left',-$(window).width()-50);
+	$("body").append(proposition);
 	
-	$("body").prepend(proposition);
-		$("#"+p.id).animate({"left": "+=2000px"},{duration:1500, easing:"easeInOutElastic",queue:false, complete:function(){
-	}}).delay(1000);
+	$("#"+p.id).animate({"left": "0"},{duration:500, queue:false, complete:function(){
+	
+	}});
 }
 
 $(document).ready(function() {
@@ -83,17 +71,23 @@ $(document).ready(function() {
 	//showLoader(true);
 	//showLoader(false);
 	
-	$("#take").click(function(){
-		hide(currentId);
-		var p = getNextProp();
-		currentId = p.id;
-		show(p);		
+	$(".button-response").click(function(){
+		var $this = $(this);
+		if($this.attr('id') == "take") {
+			// Incrémente la valeur du candidat X
+				// On récupère X en fonction de l'id de la proposition
+		} else {
+			// Désincrémente la valeur du candidat X
+				// Idem pour l'id
+		}
+		slide();
 	});
 });
 
-
-
-
-
-
-
+function slide() {
+		$("#"+currentId).animate({"left": $(window).width()+50},{duration:200, easing:"swing",queue:false, complete:function(){
+			$(this).remove();
+			var p = getNextProp();
+			show(p);
+		}});
+}
