@@ -45,29 +45,36 @@ function getNextProp(){
 }
 
 function hide(id){
-    	$("#"+id).animate({"margin-left": "+=2000px"},{duration:1000, easing:"linear",queue:false, complete:function(){
+    	$("#"+id).animate({"left": "+=2000px"},{duration:500, easing:"easeInOutElastic",queue:false, complete:function(){
 			$("#"+id).remove();
 		}});
 		return;
 }
 
 function show(p){
-	var proposition = $('<div id="'+p.id+'">'+p.text+'</div>');
+	var proposition = $('<div id="'+p.id+'"><div style="padding:50px">'+p.text+'</div></div>');
 	proposition.css("font-size","70px");
 	proposition.css("width","100%");
 	proposition.css("line-height","70px");
-	proposition.css("padding","50px");
-	proposition.css("margin-left","-100px");
 	proposition.css("margin-left","-2000px");
+	proposition.css("position","absolute");	
+	proposition.css("text-shadow","1px 1px 7px #333");	
+	proposition.css("color","#FFFFFF");		
 	proposition.attr("id",p.id);
 	
 	$("body").append(proposition);
-	$("#"+p.id).animate({"margin-left": "+=2000px"},{duration:1000, easing:"linear",queue:false, complete:function(){
-	}});
+		$("#"+p.id).animate({"left": "+=2000px"},{duration:1500, easing:"easeInOutElastic",queue:false, complete:function(){
+	}}).delay(1000);
 }
 
 $(document).ready(function() {
-	$("body").css("width","100%");
+	$("body").append("<div class='progressbar' style='position:fixed;top:left;right:0px;width:300px;height:30px'></div>");
+	$(".progressbar").progressbar({
+			value: 37
+		});
+	$("#progressbar .ui-progressbar-value").addClass("ui-corner-right");
+	$("#progressbar .ui-progressbar-value").animate({width: 300}, 'slow')
+	
 	$("body").css("height","100%");
 	$("body").css("overflow","hidden");
  	$("body").css("background-color","#74C5E3");	
@@ -75,7 +82,7 @@ $(document).ready(function() {
 	//showLoader(true);
 	//showLoader(false);
 	
-	$("#itSucks").click(function(){
+	$("#take").click(function(){
 		hide(currentId);
 		var p = getNextProp();
 		currentId = p.id;
