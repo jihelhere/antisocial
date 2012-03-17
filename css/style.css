@@ -688,7 +688,21 @@ a.thumbnail:hover{border-color:#0088cc;-webkit-box-shadow:0 1px 4px rgba(0, 105,
 .show{display:block;}
 .invisible{visibility:hidden;}
 
+#buttons-response {
+	position:relative;
+	width:440px;
+	height:102px;
+	margin:0 auto;
+}
+
+.button-response#take {
+	left:20px;
+}
+.button-response#no-take {
+	left:230px;
+}
 .button-response {
+	position:absolute;
 	background: #F26F91;
 	color: white;
 	font-size: 20px;
@@ -702,13 +716,11 @@ a.thumbnail:hover{border-color:#0088cc;-webkit-box-shadow:0 1px 4px rgba(0, 105,
 	-webkit-box-shadow: inset 4px 0px 9px 0px #f13062;
 	-o-box-shadow: inset 4px 0px 9px 0px #f13062;
 	box-shadow: inset 4px 0px 9px 0px #f13062;
-	margin-top:100px;
 	display:block;
 	text-align:center;
 	width:190px;
 	line-height:100px;
 }
-	
 	.button-response:hover {
 		color: white;
 		text-decoration: none;
