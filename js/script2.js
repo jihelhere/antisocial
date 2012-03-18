@@ -63,11 +63,11 @@ $(function() {
   }
   
   function getPropos() {
-    random = getRandom(propos.length);
-    console.log(random);
-    console.log(propos.length);
-    console.log(propos[random]);
-    return {text: getSentence(propos[random]), id: candis[random]}; 
+	random = getRandom(propos.length);
+	console.log(random);
+	console.log(propos.length);
+	console.log(propos[random]);
+	return {text: getSentence(propos[random]), id: candis[random]};
   }
   
   function getCandidats(id) {
@@ -132,10 +132,11 @@ function show(p){
 	proposition.css({left:-$(window).width()-50});
 	// proposition.css('left',-$(window).width()-50);
 	$("body").append(proposition);
-
+	currentId = p.id;
 	$("#"+p.id).animate({"left": "0"},{duration:500, queue:false, complete:function(){
 		$('buttons-response').removeClass('moving');
 	}});
+
 }
 
 	// $("body").append("<div class='progressbar' style='position:fixed;top:left;right:0px;width:300px;height:30px'></div>);
@@ -176,6 +177,8 @@ function show(p){
   
 	function slide() {
 		$('#buttons-response').addClass('moving');
+		console.log("currentId : ");
+		console.log(currentId);
 		$("#"+currentId).animate({"left": $(window).width()+50},{duration:200, easing:"swing",queue:false, complete:function(){
 			$(this).remove();
 			var p = getPropos();
@@ -250,7 +253,6 @@ function show(p){
 	function startApp(){
 			showLoader(false);
 			window.setTimeout(function() {
-				console.log("a : ");
 				$("#buttons-response").animate({"margin-top": "50px"},{duration:1000, easing:"easeOutElastic",queue:false, complete:function(){
 					alert("done");
 				}});
