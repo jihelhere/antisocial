@@ -260,10 +260,5 @@ function show(p){
 	};
 	
 	$("#buttons-response").css("margin-top","-200px");
-		
-	
-	var pTemp = getPropos();
-	var proposition = $('<div id="'+pTemp.id+'" class="proposition"><p>'+pTemp.text+'</p></div>');
-		currentId = pTemp.id;
-	$("body").append(proposition);
+
 });
