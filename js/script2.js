@@ -5,9 +5,10 @@ $(function() {
   var currentId = 0;
   var inc = 0;
   var propos_displayed = [];
+  var random = 0;
 
   var url = 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%3D%22http%3A%2F%2Fvoxe.org%2Fapi%2Fv1%2Fpropositions%2Fsearch%3FcandidacyIds%3D4f1ec52e6e27d70001000007%2C4f1eddf96e27d7000100008b%2C4f2c143202b7400005000029%2C4f1888db5c664f0001000119%2C4f188a59f8104a0001000004%2C4f1887545c664f000100010f%2C4f1888945c664f0001000116%2C4f188a20f8104a0001000002%2C4f242b3269b233000100002b%22%20and%20itemPath%20%3D%20%22json.response.propositions%22&format=json';
-  
+
   var id_candidacies = ['4f1ec52e6e27d70001000007',
     '4f1eddf96e27d7000100008b',
     '4f2c143202b7400005000029',
@@ -38,41 +39,45 @@ $(function() {
                 candis[i] = data.query.results.propositions[i].candidacy.id;
             };
             startApp();
-            
+
         }
     });
-    
-    
+
+
   }
-  
+
   function getRandom() { return Math.floor(Math.random()*501); }
-  
+
   function getSentence(text) {
     var sentences = text.split(".");
     console.log(sentences);
     var idx = Math.floor(Math.random() * sentences.length);
 
-    return sentences[idx];
+    return sentences[idx] + ".";
   }
-  
+
   function getPropos() {
-    var random = getRandom();
+    random = getRandom();
     console.log(random);
     console.log(propos.length);
     console.log(propos[random]);
-    return {text: getSentence(propos[random]), id: candis[random]}; 
+    return {text: getSentence(propos[random]), id: candis[random]};
   }
-  
+
   function getCandidats(id) {
     for (var i = 0; i < 9; i++) {
       if (id_candidacies[i] == id) return candidats[i];
     }
   }
 
-  //---------------------
-  //---------------------
-  //---------------------
+  function ifTakeClicked() {
+    propos_displayed[candis[random]]++;
+  }
   
+  //---------------------
+  //---------------------
+  //---------------------
+
   function showLoader(show){
     if (!show){
       $(".spinner").animate({"margin-top": "-=400px"},{duration:500, easing:"easeInElastic",queue:true, complete:function(){
@@ -82,7 +87,7 @@ $(function() {
     }
     // Just in case.
     $(".spinner").remove();
-    
+
     var opts = {
       lines: 16,
       length: 30,
@@ -134,6 +139,7 @@ function show(p){
 	// $("#progressbar .ui-progressbar-value").addClass("ui-corner-right");
 	// $("#progressbar .ui-progressbar-value").animate({width: 300}, 'slow')
 
+
 	//showLoader(true);
 	//showLoader(false);
 
@@ -142,9 +148,9 @@ function show(p){
   //---------------------
   showLoader(true);
   getJSON();
-  
+
   $('#buttons-response').show();
-  
+
 	$("#buttons-response:not('.moving') .button-response").live("click",function(event){
 		console.log("Click button : ");
 		var $this = $(this);
@@ -158,7 +164,7 @@ function show(p){
 		slide();
 		event.preventDefault();
 	});
-  
+
 	function slide() {
 		$('#buttons-response').addClass('moving');
 		$("#"+currentId).animate({"left": $(window).width()+50},{duration:200, easing:"swing",queue:false, complete:function(){
@@ -239,10 +245,12 @@ function show(p){
 				var p = getPropos();
 				show(p);
 			}, 500);
+
 	};
-	
+
 	function initApp(){
-		
+
 	};
+
 
 });
