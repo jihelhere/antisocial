@@ -715,7 +715,6 @@ body {
 .result {
 	width:100%;
 	line-height:70px;
-	position:absolute;
 	text-shadow:1px 1px 3px #333;
 	color:#FFFFFF;
 }
