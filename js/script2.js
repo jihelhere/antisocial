@@ -93,7 +93,7 @@ $(function() {
     }
 
 
-  function getCandidats(id) {
+  function getCandidate(id) {
     for (var i = 0; i < 9; i++) {
       if (id_candidacies[i] == id) return candidats[i];
     }
@@ -212,17 +212,35 @@ function show(p){
 
         if (p)
           show(p);
-        else
-          game_finished();
+        else {
+            var gagnant_id = gameFinished();
+            var gagnant_name = getCandidate(gagnant_id);
 
+            var resultat = $('<div id="'+gagnant_id+'" class="resultat"><p>'+gagnant_name+'</p></div>');
+	    resultat.css({left:-$(window).width()-50});
+	    // proposition.css('left',-$(window).width()-50);
+	    $("body").append(resultat);
+
+
+            //document.write(gagnant_name);
+        }
       }
     });
 	}
-  
-  function gameFinished() {
-    $('body').empty();
-    console.log(propos_displayed);
-  }
+
+    function gameFinished() {
+        $('body').empty();
+        console.log(propos_displayed);
+        var max_score  = 0;
+        var max_id = "";
+        for(var cand in propos_displayed) {
+            if(propos_displayed[cand] >= max_score) {
+                max_score = propos_displayed[cand];
+                max_id = cand;
+            }
+        }
+        return max_id;
+    }
 
 
   //---------------------
