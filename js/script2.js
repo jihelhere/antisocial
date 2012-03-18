@@ -234,8 +234,11 @@ function show(p){
             var img = $('<div class="result_img"><img id="img" src="img/' + getCandidate2(gagnant_id)+'.png'+'" style="width:0; height:0;"></div>');
 	    
           $("body").append(img);
-      
-          $('#img').animate({height: 148, width: 264}, 4000);
+          
+          $("body").append('<a href="#" class="button-response" id="recommencer">Recommencez</a>');
+          $("#recommencer").live("click", function() {
+            window.location.reload();
+          });
         }
       }
     });
