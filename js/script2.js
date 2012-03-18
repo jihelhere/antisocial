@@ -215,24 +215,33 @@ function show(p){
             var gagnant_id = gameFinished();
             var gagnant_name = getCandidate(gagnant_id);
 
+
+            var answer;
+            if(!gagnant_name)
+                answer = "";
+            else
+                answer = "Votre vote instinctif";
+
+            resultat = $('<div style="margin-top:50px;" id="'+gagnant_id+'" class="result"><p style="text-align:center">'+ answer + '</p></div>');
+	    $("body").append(resultat);
+
             var img_filename;
             if(gagnant_name)
                 img_filename = 'img/' + getCandidate2(gagnant_id)+ '.png';
             else
                 img_filename = 'img/nadine.png';
 
+            var img = $('<div class="result_img" style="text-align:center;margin-top:20px"><img width="300" height="200" src="' + img_filename + '"</div>');
 
-            var img = $('<div class="result_img" style="text-align:center;margin-top:20px"><img width="300" height="300" src="' + img_filename + '"</div>');            
-		    $("body").append(img);
-
+	    $("body").append(img);
 
             var answer;
             if(!gagnant_name)
                 answer = "Le 22 avril, restez chez vous !";
             else
-                answer = "Votre vote instinctif: "+gagnant_name;
+                answer = gagnant_name;
 
-            var resultat = $('<div style="" id="'+gagnant_id+'" class="result"><p style="text-align:center">'+ answer + '</p></div>');
+            resultat = $('<div style="" id="'+gagnant_id+'" class="result"><p style="text-align:center">'+ answer + '</p></div>');
             //	    resultat.css({left:-$(window).width()-50});
 	    // proposition.css('left',-$(window).width()-50);
 	    $("body").append(resultat);
