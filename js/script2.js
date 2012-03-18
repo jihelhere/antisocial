@@ -215,38 +215,27 @@ function show(p){
             var gagnant_id = gameFinished();
             var gagnant_name = getCandidate(gagnant_id);
 
-            var answer;
-            if(gagnant_name)
-                answer = "Votre vote instinctif";
-            else
-                answer = "";
-
-            var resultat;
-            resultat = $('<div style="" id="'+gagnant_id+'" class="result"><p style="text-align:center">'+ answer + '</p></div>');
-            $("body").append(resultat);
-
             var img_filename;
             if(gagnant_name)
                 img_filename = 'img/' + getCandidate2(gagnant_id)+ '.png';
             else
                 img_filename = 'img/nadine.svg';
 
-            var img = $('<div class="result_img" style="padding:90px 0; text-align:center;"><img  width="400" height="300" src="' + img_filename + '"</div>');
+            var img = $('<div class="result_img" style="text-align:center;margin-top:20px"><img width="400" height="300" src="' + img_filename + '"</div>');
 		    $("body").append(img);
 
 
-            answer = "";
-
+            var answer;
             if(!gagnant_name)
                 answer = "Le 22 avril, restez chez vous !";
             else
-                answer = gagnant_name;
+                answer = "Votre vote instinctif: "+gagnant_name;
 
-            resultat = $('<div style="" id="'+gagnant_id+'" class="result"><p style="text-align:center">'+ answer + '</p></div>');
+            var resultat = $('<div style="" id="'+gagnant_id+'" class="result"><p style="text-align:center">'+ answer + '</p></div>');
             //	    resultat.css({left:-$(window).width()-50});
 	    // proposition.css('left',-$(window).width()-50);
 	    $("body").append(resultat);
-            var img = $('<div class="result_img"><img id="img" src="img/' + getCandidate2(gagnant_id)+'.png'+'" style="width:0; height:0;margin-top:20px"></div>');
+            var img = $('<div class="result_img"><img id="img" src="img/' + getCandidate2(gagnant_id)+'.png'+'" style="width:0; height:0;"></div>');
 
           $("body").append(img);
 
