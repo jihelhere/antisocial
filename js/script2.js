@@ -5,6 +5,7 @@ $(function() {
   var currentId = 0;
   var inc = 0;
   var propos_displayed = [];
+  var random = 0;
 
   var url = 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%3D%22http%3A%2F%2Fvoxe.org%2Fapi%2Fv1%2Fpropositions%2Fsearch%3FcandidacyIds%3D4f1ec52e6e27d70001000007%2C4f1eddf96e27d7000100008b%2C4f2c143202b7400005000029%2C4f1888db5c664f0001000119%2C4f188a59f8104a0001000004%2C4f1887545c664f000100010f%2C4f1888945c664f0001000116%2C4f188a20f8104a0001000002%2C4f242b3269b233000100002b%22%20and%20itemPath%20%3D%20%22json.response.propositions%22&format=json';
   
@@ -56,7 +57,7 @@ $(function() {
   }
   
   function getPropos() {
-    var random = getRandom();
+    random = getRandom();
     console.log(random);
     console.log(propos.length);
     console.log(propos[random]);
@@ -69,6 +70,10 @@ $(function() {
     }
   }
 
+  function ifTakeClicked() {
+    propos_displayed[candis[random]]++;
+  }
+  
   //---------------------
   //---------------------
   //---------------------
@@ -133,11 +138,11 @@ function show(p){
 		// });
 	// $("#progressbar .ui-progressbar-value").addClass("ui-corner-right");
 	// $("#progressbar .ui-progressbar-value").animate({width: 300}, 'slow')
+
 	
 	$("body").css("height","100%");
 	$("body").css("overflow","hidden");
  	$("body").css("background-color","#74C5E3");	
-
 	//showLoader(true);
 	//showLoader(false);
 
@@ -238,25 +243,21 @@ function show(p){
 
 	function startApp(){
 			showLoader(false);
-			initApp();
+			window.setTimeout(function() {
+				console.log("a : ");
+				$("#buttons-response").animate({"margin-top": "50px"},{duration:1000, easing:"easeOutElastic",queue:false, complete:function(){
+					alert("done");
+				}});
+				var p = getPropos();
+				show(p);
+			}, 1000);
 	};
 	
 	$("#buttons-response").css("margin-top","-200px");
-	
-	function initApp(){
-		window.setTimeout(function(){
-			$("#buttons-response").animate({"margin-top": "50px"},{duration:1000, easing:"easeOutElastic",queue:false, complete:function(){
-				alert("done");
-			}});
-
-		},1000);
-
-	};
 		
 	
 	var pTemp = getPropos();
 	var proposition = $('<div id="'+pTemp.id+'" class="proposition"><p>'+pTemp.text+'</p></div>');
 		currentId = pTemp.id;
 	$("body").append(proposition);
-
 });
