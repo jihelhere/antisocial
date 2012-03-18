@@ -695,17 +695,17 @@ body {
 }
 
 .proposition {
-	width:100%;
+	width: 1000px;
+        margin:0 auto;
 	margin-top:20px;
-	line-height:70px;
-	position:absolute;
+	line-height:50px;
 	text-shadow:1px 1px 3px #333;
 	color:#FFFFFF;
 }
 .proposition p {
 	text-align:left;
 	padding:0 50px;
-	font-size:70px;
+	font-size:50px;
 	line-height:1.1em;
 }
 
@@ -770,7 +770,7 @@ body {
 		-o-box-shadow: inset 4px 4px 9px 0px #f13062;
 		box-shadow: inset 4px 4px 9px 0px #f13062;
 	}
-	
+
 #timer {
 	display:none;
 	position:absolute;

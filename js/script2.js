@@ -31,7 +31,7 @@ $(function() {
     'marine-le-pen',
     'jean-luc-melenchon',
     'nicolas-sarkozy'];
-    
+
   var candidats = ['Nathalie Arthaud',
                    'François Bayrou',
                    'Jacques Cheminade',
@@ -54,9 +54,9 @@ $(function() {
 
     showLoader(false);
     startApp();
-    
+
   }
-  
+
     function getRandom(size) { return Math.floor(Math.random()*size); }
 
     function getSentence(text) {
@@ -181,7 +181,6 @@ function show(p){
 
 	$("body").css("height","100%");
 	$("body").css("overflow","hidden");
- 	$("body").css("background-color","#74C5E3");
 	//showLoader(true);
 	//showLoader(false);
 
@@ -286,10 +285,10 @@ function show(p){
 				var p = get_next_question();
 		        show(p);
 		         timer1()
-		         
+
 			}, 1000);
 	};
-	
+
 	function startTimer() {
 		var timer = 2500, interval = 5;
 		$('#timer').show();
@@ -304,24 +303,23 @@ function show(p){
 		}, 5);
 
 	}
-	
+
 	function reinitTimer() {
 		clearInterval(intervalSetter);
 		$('#timer span').css('width', '100%');
-		
+
 	}
 
 	function timer1(){
-		$("body").delay(1000).queue(function(){ 
+		$("body").delay(1000).queue(function(){
 			counter--;
 			$("#counter").text = counter;
 			if (counter>0){
 				timer1();
 			}
 
-			$(this).dequeue(); 
+			$(this).dequeue();
 		});
 	}
 
 });
-
