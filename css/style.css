@@ -694,6 +694,10 @@ body {
 	background-color:#74C5E3;
 }
 
+li {
+  margin-bottom: 2px;
+}
+
 #splash {
 	width:500px;
 	margin:100px auto 0;
