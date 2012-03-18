@@ -9,7 +9,6 @@ $(function() {
   var QUESTIONS = [];
   var intervalSetter = 0;
 
-
   var url = 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%3D%22http%3A%2F%2Fvoxe.org%2Fapi%2Fv1%2Fpropositions%2Fsearch%3FcandidacyIds%3D4f1ec52e6e27d70001000007%2C4f1eddf96e27d7000100008b%2C4f2c143202b7400005000029%2C4f1888db5c664f0001000119%2C4f188a59f8104a0001000004%2C4f1887545c664f000100010f%2C4f1888945c664f0001000116%2C4f188a20f8104a0001000002%2C4f242b3269b233000100002b%22%20and%20itemPath%20%3D%20%22json.response.propositions%22&format=json';
 
   var id_candidacies = ['4f1ec52e6e27d70001000007',
@@ -53,7 +52,6 @@ $(function() {
     }
 
     showLoader(false);
-    startApp();
 
   }
 
@@ -191,7 +189,15 @@ function show(p){
   getJSON();
 
   $('#buttons-response').show();
-
+	
+	$('#commencer').live('click', function(event) {
+		diffBottom = $(window).height() + 20;
+		$('#splash').animate({'margin-top':'+='+diffBottom}, 300, function() {
+			$('#splash').remove();
+			startApp();
+		})
+		event.preventDefault();
+	});
 	$("#buttons-response:not('.moving') .button-response").click(function(event){
 		$('#buttons-response').addClass('moving');
 		var $this = $(this);
@@ -215,24 +221,33 @@ function show(p){
             var gagnant_id = gameFinished();
             var gagnant_name = getCandidate(gagnant_id);
 
+
+            var answer;
+            if(!gagnant_name)
+                answer = "";
+            else
+                answer = "Votre vote instinctif";
+
+            resultat = $('<div style="margin-top:50px;" id="'+gagnant_id+'" class="result"><p style="text-align:center">'+ answer + '</p></div>');
+	    $("body").append(resultat);
+
             var img_filename;
             if(gagnant_name)
                 img_filename = 'img/' + getCandidate2(gagnant_id)+ '.png';
             else
                 img_filename = 'img/nadine.png';
 
+            var img = $('<div class="result_img" style="text-align:center;margin-top:20px"><img width="300" height="200" src="' + img_filename + '"</div>');
 
-            var img = $('<div class="result_img" style="text-align:center;margin-top:20px"><img width="300" height="300" src="' + img_filename + '"</div>');            
-		    $("body").append(img);
-
+	    $("body").append(img);
 
             var answer;
             if(!gagnant_name)
                 answer = "Le 22 avril, restez chez vous !";
             else
-                answer = "Votre vote instinctif: "+gagnant_name;
+                answer = gagnant_name;
 
-            var resultat = $('<div style="" id="'+gagnant_id+'" class="result"><p style="text-align:center">'+ answer + '</p></div>');
+            resultat = $('<div style="" id="'+gagnant_id+'" class="result"><p style="text-align:center">'+ answer + '</p></div>');
             //	    resultat.css({left:-$(window).width()-50});
 	    // proposition.css('left',-$(window).width()-50);
 	    $("body").append(resultat);
@@ -302,15 +317,15 @@ function show(p){
 
 	function startApp(){
 			showLoader(false);
-			window.setTimeout(function() {
+//			window.setTimeout(function() {
 				$("#buttons-response").animate({"bottom": "20px"},{duration:500, easing:"easeOutElastic",queue:false, complete:function(){
 				}});
         		QUESTIONS = prepare_game_set(NB_QUESTIONS);
 				var p = get_next_question();
 		        show(p);
-		         timer1()
+//		         timer1()
 
-			}, 1000);
+//			}, 1000);
 	};
 
 	function startTimer() {
