@@ -5,7 +5,7 @@ $(function() {
   var inc = 0;
   var propos_displayed = [];
   var random = 0;
-  var NB_QUESTIONS = 5;
+  var NB_QUESTIONS = 10;
   var QUESTIONS = [];
   var intervalSetter = 0;
 

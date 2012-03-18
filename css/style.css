@@ -712,10 +712,11 @@ body {
 	#splash h1 {
 		font-size:2.2em;
 		margin-bottom:30px;
+    text-align: center;
 	}
 	#splash p {
 		margin-top:10px;
-		font-size:1.3em;
+		font-size:1.2em;
 	}
 	#splash ol {
 		margin-top:0px;
@@ -739,7 +740,7 @@ body {
 	color:#FFFFFF;
 }
 .proposition p {
-     margin:0 auto;
+	margin:0 auto;
 	width: 800px;
 	text-align:justify;
 	padding:20px 50px;
