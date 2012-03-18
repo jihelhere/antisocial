@@ -772,6 +772,7 @@ body {
 	}
 	
 #timer {
+	display:none;
 	position:absolute;
 	top:20px;
 	width:100%;
