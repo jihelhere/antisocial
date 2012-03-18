@@ -53,7 +53,6 @@ $(function() {
                 candis[i] = data.query.results.propositions[i].candidacy.id;
             };
             startApp();
-
         }
     });
 
@@ -105,24 +104,31 @@ $(function() {
     }
 
 
-  function getCandidate(id) {
-    for (var i = 0; i < 9; i++) {
-      if (id_candidacies[i] == id) return candidats[i];
+    function getCandidate(id) {
+        for (var i = 0; i < candidats.length; i++) {
+            if (id_candidacies[i] == id) return candidats[i];
+        }
     }
-  }
+
+    function getCandidate2(id) {
+        for (var i = 0; i < candidats2.length; i++) {
+            if (id_candidacies[i] == id) return candidats2[i];
+        }
+    }
+
 
   function ifTakeClicked() {
 
-      console.log("inc:");
-      console.log(inc);
+      // console.log("inc:");
+      // console.log(inc);
 
       var str = QUESTIONS[inc-1].id
-      console.log("str:");
-      console.log(str);
+      // console.log("str:");
+      // console.log(str);
 
       if(propos_displayed[str] == null) propos_displayed[str] = 0;
       propos_displayed[str] = propos_displayed[str] + 1;
-      console.log(propos_displayed[str]);
+//      console.log(propos_displayed[str]);
 
   }
 
@@ -232,7 +238,8 @@ function show(p){
             //	    resultat.css({left:-$(window).width()-50});
 	    // proposition.css('left',-$(window).width()-50);
 	    $("body").append(resultat);
-
+            var img = $('<div class="result_img"><img src="img/' + getCandidate2(gagnant_id)+'.png'+'"></div>');
+	    $("body").append(img);
 
             //document.write(gagnant_name);
         }
