@@ -29,16 +29,20 @@ $(function() {
     'nicolas-sarkozy'];
 
   function getJSON() {
-    $.ajaxSetup({'async': false});
-
+	showLoader(true);
     $.getJSON(url, function(data) {
+    	showLoader(false);
         if (data.query.results) {
             for (var i = 0; i < 500; i++) {
                 propos[i] = data.query.results.propositions[i].text;
                 candis[i] = data.query.results.propositions[i].candidacy.id;
             };
+            startApp();
+            
         }
     });
+    
+    
   }
   
   function getRandom() { return Math.floor(Math.random()*501); }
@@ -140,12 +144,12 @@ function show(p){
   //---------------------
   //---------------------
   //---------------------
-  
+  showLoader(true);
   getJSON();
   
   $('#buttons-response').show();
   
-	$("#buttons-response:not('.moving') .button-response").click(function(event){
+	$("#buttons-response:not('.moving') .button-response").live("click",function(event){
 		console.log("Click button : ");
 		var $this = $(this);
 		if($this.attr('id') == "take") {
@@ -232,6 +236,11 @@ function show(p){
   // A la fin du jeu, on cherche la valeur de tab la plus grande, on prend la key correspondante
   // On utilise la fonction getCandidats pour récupérer son nom : getCandidats(key)
 
+	function startApp(){
+			showLoader(false);
+			
+			
+	};
 	
 	var pTemp = getPropos();
 	var proposition = $('<div id="'+pTemp.id+'" class="proposition"><p>'+pTemp.text+'</p></div>');
