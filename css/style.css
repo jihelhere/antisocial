@@ -696,7 +696,7 @@ body {
 
 .proposition {
 	position:absolute;
-	margin-top:50px;
+	margin-top:70px;
 	width:100%;
 	line-height:50px;
 	text-shadow:1px 1px 3px #333;
@@ -704,9 +704,9 @@ body {
 }
 .proposition p {
      margin:0 auto;
-	width: 1000px;
-	text-align:left;
-	padding:0 50px;
+	width: 980px;
+	text-align:justify;
+	padding:20px 50px;
 	font-size:50px;
 	line-height:1.1em;
 }
