@@ -235,11 +235,11 @@ function show(p){
             //	    resultat.css({left:-$(window).width()-50});
 	    // proposition.css('left',-$(window).width()-50);
 	    $("body").append(resultat);
-            var img = $('<div class="result_img"><img id="img" src="img/' + getCandidate2(gagnant_id)+'.png'+'" style="width:0; height:0;"></div>');
+            var img = $('<div class="result_img"><img id="img" src="img/' + getCandidate2(gagnant_id)+'.png'+'" style="width:0; height:0;margin-top:20px"></div>');
 
           $("body").append(img);
 
-          $("body").append('<a href="#" class="button-response" id="recommencer">Recommencez</a>');
+          $("body").append('<a href="#" style="display: block;position: fixed;left: 50%;margin-left: -80px;bottom:20px" class="button-response" id="recommencer">Recommencez</a>');
           $("#recommencer").live("click", function() {
             window.location.reload();
           });
