@@ -36,7 +36,7 @@ $(function() {
                    'François Bayrou',
                    'Jacques Cheminade',
                    'Nicolas Dupont-Aignan',
-                   'Francois Hollande',
+                   'François Hollande',
                    'Eva Joly',
                    'Marine Le Pen',
                    'Jean-Luc Melenchon',
