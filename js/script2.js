@@ -224,21 +224,26 @@ function show(p){
             var img = $('<div class="result_img" style="text-align:center;"><img width="400" height="300" src="' + img_filename + '"</div>');
 		    $("body").append(img);
 
-            if(!gagnant_name)
-                gagnant_name = "MAL !";
 
-            var resultat = $('<div style="" id="'+gagnant_id+'" class="result"><p style="text-align:center">'+"Vous votez : "+gagnant_name+'</p></div>');
+            var answer;
+            if(!gagnant_name)
+                answer = "Le 22 avril, restez chez vous !";
+            else
+                answer = "Votre vote instinctif: "+gagnant_name;
+
+            var resultat = $('<div style="" id="'+gagnant_id+'" class="result"><p style="text-align:center">'+ answer + '</p></div>');
             //	    resultat.css({left:-$(window).width()-50});
 	    // proposition.css('left',-$(window).width()-50);
 	    $("body").append(resultat);
             var img = $('<div class="result_img"><img id="img" src="img/' + getCandidate2(gagnant_id)+'.png'+'" style="width:0; height:0;"></div>');
-	    
+
           $("body").append(img);
-          
+
           $("body").append('<a href="#" class="button-response" id="recommencer">Recommencez</a>');
           $("#recommencer").live("click", function() {
             window.location.reload();
           });
+
         }
       }
     });
