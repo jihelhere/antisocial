@@ -189,7 +189,7 @@ function show(p){
   getJSON();
 
   $('#buttons-response').show();
-	
+
 	$('#commencer').live('click', function(event) {
 		diffBottom = $(window).height() + 20;
 		$('#splash').animate({'margin-top':'+='+diffBottom}, 300, function() {
@@ -257,6 +257,10 @@ function show(p){
           $("body").append(img);
 
           $("body").append('<a href="#" style="display: block;position: fixed;left: 50%;margin-left: -92px;bottom:20px" class="button-response" id="recommencer">Recommencez</a>');
+
+            //analysis();
+
+
           $("#recommencer").live("click", function() {
             window.location.reload();
           });
@@ -278,6 +282,18 @@ function show(p){
         }
         return max_id;
     }
+
+    function analysis()
+    {
+        for(var i = 0; i < QUESTIONS.length; i++)
+        {
+            var resultat = $('<div class="analysis"><p style="text-align:center">'+ "Q"+i+" "+ getCandidate(QUESTIONS[i].id)  + '</p></div>');
+            //	    resultat.css({left:-$(window).width()-50});
+	    // proposition.css('left',-$(window).width()-50);
+	    $("body").append(resultat);
+        }
+    }
+
 
 
   //---------------------
