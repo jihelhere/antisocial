@@ -2,7 +2,6 @@ $(function() {
 
   var propos = [];
   var candis = [];
-  var currentId = 0;
   var inc = 0;
   var propos_displayed = [];
   var random = 0;
@@ -156,7 +155,6 @@ function show(p){
 	proposition.css({left:-$(window).width()-50});
 	// proposition.css('left',-$(window).width()-50);
 	$("body").append(proposition);
-	currentId = p.id;
 	$("#"+p.id).animate({"left": "0"},{duration:500, queue:false, complete:function(){
 		$('buttons-response').removeClass('moving');
 	}});
@@ -197,9 +195,7 @@ function show(p){
 	});
 
 	function slide() {
-		console.log("currentId : ");
-		console.log(currentId);
-      $("#"+currentId).animate({"left": $(window).width()+50},{duration:200, easing:"swing",queue:false, complete:function(){
+      $(".proposition").animate({"left": $(window).width()+50},{duration:200, easing:"swing",queue:false, complete:function(){
         $(this).remove();
         var p = get_next_question();
         
