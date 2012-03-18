@@ -7,10 +7,7 @@ $(function() {
   var random = 0;
   var NB_QUESTIONS = 5;
   var QUESTIONS = [];
-<<<<<<< HEAD
   var counter = 2000;
-=======
->>>>>>> 7a32c6be04bcd8f1856c53ddf844514e79a75d0f
 
   var url = 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%3D%22http%3A%2F%2Fvoxe.org%2Fapi%2Fv1%2Fpropositions%2Fsearch%3FcandidacyIds%3D4f1ec52e6e27d70001000007%2C4f1eddf96e27d7000100008b%2C4f2c143202b7400005000029%2C4f1888db5c664f0001000119%2C4f188a59f8104a0001000004%2C4f1887545c664f000100010f%2C4f1888945c664f0001000116%2C4f188a20f8104a0001000002%2C4f242b3269b233000100002b%22%20and%20itemPath%20%3D%20%22json.response.propositions%22&format=json';
 
@@ -214,13 +211,13 @@ function show(p){
         else {
             var gagnant_id = gameFinished();
             var gagnant_name = getCandidate(gagnant_id);
+            var img = $('<div class="result_img" style="text-align:center;"><img style="margin:30px" src="img/' + getCandidate2(gagnant_id)+'.png'+'"></div>');
+		    $("body").append(img);
 
-            var resultat = $('<div id="'+gagnant_id+'" class="result"><p>'+"Vous votez : "+gagnant_name+'</p></div>');
+            var resultat = $('<div style="" id="'+gagnant_id+'" class="result"><p style="text-align:center">'+"Vous votez : "+gagnant_name+'</p></div>');
             //	    resultat.css({left:-$(window).width()-50});
 	    // proposition.css('left',-$(window).width()-50);
 	    $("body").append(resultat);
-            var img = $('<div class="result_img"><img src="img/' + getCandidate2(gagnant_id)+'.png'+'"></div>');
-	    $("body").append(img);
 
             //document.write(gagnant_name);
         }
