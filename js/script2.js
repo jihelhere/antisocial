@@ -45,19 +45,23 @@ $(function() {
     
     
   }
-  
-  function getRandom() { return Math.floor(Math.random()*501); }
-  
-  function getSentence(text) {
-    var sentences = text.split(".");
-    console.log(sentences);
-    var idx = Math.floor(Math.random() * sentences.length);
+    function getRandom(size) { return Math.floor(Math.random()*size); }
 
-    return sentences[idx];
+    function getSentence(text) {
+        console.log(text);
+        var sentences = text.split(".");
+        console.log(sentences);
+
+
+        var idx = getRandom(sentences.length - 1) ;
+
+        console.log(sentences[idx]);
+
+        return sentences[idx] + ".";
   }
   
   function getPropos() {
-    random = getRandom();
+    random = getRandom(propos.length);
     console.log(random);
     console.log(propos.length);
     console.log(propos[random]);
@@ -73,7 +77,7 @@ $(function() {
   function ifTakeClicked() {
     propos_displayed[candis[random]]++;
   }
-  
+
   //---------------------
   //---------------------
   //---------------------
