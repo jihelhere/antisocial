@@ -36,7 +36,7 @@ $(function() {
                    'François Bayrou',
                    'Jacques Cheminade',
                    'Nicolas Dupont-Aignan',
-                   'François Hollande',
+                   'Francois Hollande',
                    'Eva Joly',
                    'Marine Le Pen',
                    'Jean-Luc Melenchon',
@@ -219,9 +219,9 @@ function show(p){
             if(gagnant_name)
                 img_filename = 'img/' + getCandidate2(gagnant_id)+ '.png';
             else
-                img_filename = 'img/nadine.svg';
+                img_filename = 'img/nadine.png';
 
-            var img = $('<div class="result_img" style="text-align:center;margin-top:20px"><img width="400" height="300" src="' + img_filename + '"</div>');
+            var img = $('<div class="result_img" style="text-align:center;margin-top:20px"><img width="300" height="300" src="' + img_filename + '"</div>');
 		    $("body").append(img);
 
 
