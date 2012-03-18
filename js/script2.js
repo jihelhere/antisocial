@@ -54,8 +54,6 @@ $(function() {
 
 
         var idx = getRandom(sentences.length - 1) ;
-        if (idx < 0)
-            idx = 0;
 
         console.log(sentences[idx]);
 
@@ -252,7 +250,6 @@ function show(p){
 			window.setTimeout(function() {
 				console.log("a : ");
 				$("#buttons-response").animate({"margin-top": "50px"},{duration:1000, easing:"easeOutElastic",queue:false, complete:function(){
-					alert("done");
 				}});
 				var p = getPropos();
 				show(p);
