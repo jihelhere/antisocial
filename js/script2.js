@@ -218,9 +218,10 @@ function show(p){
       }
     });
 	}
-
-  function game_finished() {
+  
+  function gameFinished() {
     $('body').empty();
+    console.log(propos_displayed);
   }
 
 
@@ -258,11 +259,6 @@ function show(p){
 
 
     // }
-
-  // On envoie une proposition : propos[iRandom]
-  // Si il répond oui, on incrémente un tableau associatif : tab[candis[iRandom]]++
-  // A la fin du jeu, on cherche la valeur de tab la plus grande, on prend la key correspondante
-  // On utilise la fonction getCandidats pour récupérer son nom : getCandidats(key)
 
 	function startApp(){
 			showLoader(false);
