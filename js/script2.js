@@ -55,6 +55,8 @@ $(function() {
 
 
         var idx = getRandom(sentences.length - 1) ;
+        if (idx < 0)
+            idx = 0;
 
         console.log(sentences[idx]);
 
