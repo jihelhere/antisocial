@@ -699,10 +699,26 @@ body {
 	margin-top:20px;
 	line-height:70px;
 	position:absolute;
-	text-shadow:1px 1px 3px #333;	
+	text-shadow:1px 1px 3px #333;
 	color:#FFFFFF;
 }
 .proposition p {
+	text-align:left;
+	padding:0 50px;
+	font-size:70px;
+	line-height:1.1em;
+}
+
+
+.result {
+	width:100%;
+	margin-top:20px;
+	line-height:70px;
+	position:absolute;
+	text-shadow:1px 1px 3px #333;
+	color:#FFFFFF;
+}
+.result p {
 	text-align:left;
 	padding:0 50px;
 	font-size:70px;

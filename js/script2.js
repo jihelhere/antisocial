@@ -21,7 +21,7 @@ $(function() {
     '4f188a20f8104a0001000002',
     '4f242b3269b233000100002b'];
 
-  var candidats = ['nathalie-arthaud',
+  var candidats2 = ['nathalie-arthaud',
     'francois-bayrou',
     'jacques-cheminade',
     'nicolas-dupont-aignan',
@@ -30,6 +30,18 @@ $(function() {
     'marine-le-pen',
     'jean-luc-melenchon',
     'nicolas-sarkozy'];
+
+  var candidats = ['Nathalie Arthaud',
+                   'François Bayrou',
+                   'Jacques Cheminade',
+                   'Nicolas Dupont-Aignan',
+                   'Francois Hollande',
+                   'Eva Joly',
+                   'Marine Le Pen',
+                   'Jean-Luc Melenchon',
+                   'Nicolas Sarkozy'];
+
+
 
   function getJSON() {
 	showLoader(true);
@@ -216,8 +228,8 @@ function show(p){
             var gagnant_id = gameFinished();
             var gagnant_name = getCandidate(gagnant_id);
 
-            var resultat = $('<div id="'+gagnant_id+'" class="resultat"><p>'+gagnant_name+'</p></div>');
-	    resultat.css({left:-$(window).width()-50});
+            var resultat = $('<div id="'+gagnant_id+'" class="result"><p>'+"Vous votez : "+gagnant_name+'</p></div>');
+            //	    resultat.css({left:-$(window).width()-50});
 	    // proposition.css('left',-$(window).width()-50);
 	    $("body").append(resultat);
 
