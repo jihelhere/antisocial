@@ -694,10 +694,6 @@ body {
 	background-color:#74C5E3;
 }
 
-li {
-  margin-bottom: 2px;
-}
-
 #splash {
 	width:500px;
 	margin:100px auto 0;
@@ -747,7 +743,7 @@ li {
 	width: 800px;
 	text-align:justify;
 	padding:20px 50px;
-	font-size:50px;
+	font-size:45px;
 	line-height:1.1em;
 }
 

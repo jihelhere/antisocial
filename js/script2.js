@@ -237,7 +237,7 @@ function show(p){
             else
                 img_filename = 'img/nadine.png';
 
-            var img = $('<div class="result_img" style="text-align:center;margin-top:20px"><img width="300" height="200" src="' + img_filename + '"</div>');
+            var img = $('<div class="result_img" style="text-align:center;margin-top:20px"><img width="300" height="200" src="' + img_filename + '" /></div>');
 
 	    $("body").append(img);
 
