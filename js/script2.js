@@ -234,18 +234,15 @@ function show(p){
 
 	function startApp(){
 			showLoader(false);
-			
-			
+			window.setTimeout(function() {
+				console.log("a : ");
+				var p = getPropos();
+				show(p);
+			}, 500);
 	};
 	
 	function initApp(){
 		
 	};
-		
-	
-	var pTemp = getPropos();
-	var proposition = $('<div id="'+pTemp.id+'" class="proposition"><p>'+pTemp.text+'</p></div>');
-		currentId = pTemp.id;
-	$("body").append(proposition);
 
 });
