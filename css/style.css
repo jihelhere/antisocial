@@ -696,28 +696,31 @@ body {
 
 .proposition {
 	width:100%;
-	margin-top:170px;
+	margin-top:20px;
 	line-height:70px;
 	position:absolute;
 	text-shadow:1px 1px 3px #333;	
 	color:#FFFFFF;
 }
 .proposition p {
-	text-align:justify;
+	text-align:left;
 	padding:0 50px;
 	font-size:70px;
 	line-height:1.1em;
 }
 
 #buttons-response {
-	position:fixed;
-	width:440px;
-	height:102px;
-	margin:0 auto;
+	position:absolute;
+	bottom:20px;
 	left: 50%;
 	margin-left: -220px;
 	z-index:5;
 }
+	#buttons-response div {
+		margin:0 auto;
+		width:440px;
+		height:102px;
+	}
 
 .button-response#take {
 	left:20px;
