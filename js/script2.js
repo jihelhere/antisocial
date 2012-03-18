@@ -162,6 +162,7 @@ function show(p){
   $('#buttons-response').show();
   
 	$("#buttons-response:not('.moving') .button-response").click(function(event){
+		$('#buttons-response').addClass('moving');
 		console.log("Click button : ");
 		var $this = $(this);
 		if($this.attr('id') == "take") {
@@ -176,7 +177,6 @@ function show(p){
 	});
   
 	function slide() {
-		$('#buttons-response').addClass('moving');
 		console.log("currentId : ");
 		console.log(currentId);
 		$("#"+currentId).animate({"left": $(window).width()+50},{duration:200, easing:"swing",queue:false, complete:function(){
