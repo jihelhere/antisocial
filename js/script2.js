@@ -222,6 +222,7 @@ function show(p){
                 img_filename = 'img/nadine.svg';
 
             var img = $('<div class="result_img" style="text-align:center;margin-top:20px"><img width="400" height="300" src="' + img_filename + '"</div>');
+            
 		    $("body").append(img);
 
 
@@ -235,6 +236,7 @@ function show(p){
             //	    resultat.css({left:-$(window).width()-50});
 	    // proposition.css('left',-$(window).width()-50);
 	    $("body").append(resultat);
+
             var img = $('<div class="result_img"><img id="img" src="img/' + getCandidate2(gagnant_id)+'.png'+'" style="width:0; height:0;"></div>');
 
           $("body").append(img);
