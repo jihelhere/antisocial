@@ -46,14 +46,19 @@ $(function() {
 
   }
 
-  function getRandom(size) { return Math.floor(Math.random()*size); }
+    function getRandom(size) { return Math.floor(Math.random()*size); }
 
-  function getSentence(text) {
-    var sentences = text.split(".");
-    console.log(sentences);
-    var idx = Math.floor(Math.random() * sentences.length);
+    function getSentence(text) {
+        console.log(text);
+        var sentences = text.split(".");
+        console.log(sentences);
 
-    return sentences[idx] + ".";
+
+        var idx = getRandom(sentences.length - 1) ;
+
+        console.log(sentences[idx]);
+
+        return sentences[idx] + ".";
   }
 
   function getPropos() {
