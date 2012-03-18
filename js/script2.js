@@ -6,9 +6,11 @@ $(function() {
   var inc = 0;
   var propos_displayed = [];
   var random = 0;
+  var QUESTIONS = [];
+
 
   var url = 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%3D%22http%3A%2F%2Fvoxe.org%2Fapi%2Fv1%2Fpropositions%2Fsearch%3FcandidacyIds%3D4f1ec52e6e27d70001000007%2C4f1eddf96e27d7000100008b%2C4f2c143202b7400005000029%2C4f1888db5c664f0001000119%2C4f188a59f8104a0001000004%2C4f1887545c664f000100010f%2C4f1888945c664f0001000116%2C4f188a20f8104a0001000002%2C4f242b3269b233000100002b%22%20and%20itemPath%20%3D%20%22json.response.propositions%22&format=json';
-  
+
   var id_candidacies = ['4f1ec52e6e27d70001000007',
     '4f1eddf96e27d7000100008b',
     '4f2c143202b7400005000029',
@@ -39,11 +41,11 @@ $(function() {
                 candis[i] = data.query.results.propositions[i].candidacy.id;
             };
             startApp();
-            
+
         }
     });
-    
-    
+
+
   }
     function getRandom(size) { return Math.floor(Math.random()*size); }
 
@@ -54,22 +56,47 @@ $(function() {
 
 
         var idx = getRandom(sentences.length - 1) ;
-        if (idx < 0)
-            idx = 0;
 
         console.log(sentences[idx]);
 
         return sentences[idx] + ".";
   }
-  
+
   function getPropos() {
-	random = getRandom(propos.length);
-	console.log(random);
-	console.log(propos.length);
-	console.log(propos[random]);
-	return {text: getSentence(propos[random]), id: candis[random]};
+      random = getRandom(propos.length);
+      console.log(random);
+      console.log(propos.length);
+      console.log(propos[random]);
+      return {text: getSentence(propos[random]), id: candis[random]};
   }
-  
+
+
+    function prepare_game_set(size) {
+        var res = [];
+        for(var i = 0; i < size; i++) {
+            res.push(getPropos());
+        }
+        return res;
+    }
+
+
+    // Put that in StartApp
+    QUESTIONS = prepare_game_set(20);
+
+    function get_next_question()
+    {
+        if (inc < QUESTIONS.length)
+        {
+            return QUESTIONS[inc++];
+        }
+        else
+        {
+            inc = 0;
+            return null;
+        }
+    }
+
+
   function getCandidats(id) {
     for (var i = 0; i < 9; i++) {
       if (id_candidacies[i] == id) return candidats[i];
@@ -83,7 +110,7 @@ $(function() {
   //---------------------
   //---------------------
   //---------------------
-  
+
   function showLoader(show){
     if (!show){
       $(".spinner").animate({"margin-top": "-=400px"},{duration:500, easing:"easeInElastic",queue:true, complete:function(){
@@ -93,7 +120,7 @@ $(function() {
     }
     // Just in case.
     $(".spinner").remove();
-    
+
     var opts = {
       lines: 16,
       length: 30,
@@ -146,10 +173,10 @@ function show(p){
 	// $("#progressbar .ui-progressbar-value").addClass("ui-corner-right");
 	// $("#progressbar .ui-progressbar-value").animate({width: 300}, 'slow')
 
-	
+
 	$("body").css("height","100%");
 	$("body").css("overflow","hidden");
- 	$("body").css("background-color","#74C5E3");	
+ 	$("body").css("background-color","#74C5E3");
 	//showLoader(true);
 	//showLoader(false);
 
@@ -158,9 +185,9 @@ function show(p){
   //---------------------
   showLoader(true);
   getJSON();
-  
+
   $('#buttons-response').show();
-  
+
 	$("#buttons-response:not('.moving') .button-response").click(function(event){
 		$('#buttons-response').addClass('moving');
 		console.log("Click button : ");
@@ -175,7 +202,7 @@ function show(p){
 		slide();
 		event.preventDefault();
 	});
-  
+
 	function slide() {
 		console.log("currentId : ");
 		console.log(currentId);
@@ -215,33 +242,10 @@ function show(p){
             // );
     // }
 
-    // function prepare_question_set(size, propos) {
-        // var propos_size = propos.length
-        // var res = [];
-
-
-        // for(var i = 0; i < size; i++) {
-
-            // var idx = Math.floor(Math.random() * propos_size);
-            // res.push(filter_proposition(propos[idx]));
-        // }
-
-        // return res;
-    // }
-
     // var CURRENT = 0;
     // var QUESTIONS = prepare_question_set(20, propos);
 
-    // function get_next_question() {
-        // if (CURRENT < QUESTIONS.length)
-            // {
-                // return QUESTIONS[CURRENT++];
-            // }
-        // else
-            // {
-                // CURRENT = 0;
-                // return null;
-            // }
+
 
     // }
 
@@ -254,13 +258,12 @@ function show(p){
 			showLoader(false);
 			window.setTimeout(function() {
 				$("#buttons-response").animate({"margin-top": "50px"},{duration:1000, easing:"easeOutElastic",queue:false, complete:function(){
-					alert("done");
 				}});
 				var p = getPropos();
 				show(p);
 			}, 1000);
 	};
-	
+
 	$("#buttons-response").css("margin-top","-200px");
 
 });
