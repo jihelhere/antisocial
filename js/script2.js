@@ -175,10 +175,6 @@ function show(p){
 		// });
 	// $("#progressbar .ui-progressbar-value").addClass("ui-corner-right");
 	// $("#progressbar .ui-progressbar-value").animate({width: 300}, 'slow')
-
-
-	$("body").css("height","100%");
-	$("body").css("overflow","hidden");
 	//showLoader(true);
 	//showLoader(false);
 
