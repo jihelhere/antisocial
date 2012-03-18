@@ -238,6 +238,11 @@ function show(p){
 			
 	};
 	
+	function initApp(){
+		
+	};
+		
+	
 	var pTemp = getPropos();
 	var proposition = $('<div id="'+pTemp.id+'" class="proposition"><p>'+pTemp.text+'</p></div>');
 		currentId = pTemp.id;
