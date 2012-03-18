@@ -712,6 +712,7 @@ body {
 	#splash h1 {
 		font-size:2.2em;
 		margin-bottom:30px;
+    text-align: center;
 	}
 	#splash p {
 		margin-top:10px;
