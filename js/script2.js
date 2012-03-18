@@ -100,7 +100,7 @@ $(function() {
   }
 
   function ifTakeClicked() {
-    propos_displayed[candis[random]]++;
+    propos_displayed[QUESTIONS[inc-1].id]++;
   }
 
   //---------------------
