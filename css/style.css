@@ -727,7 +727,7 @@ body {
 
 #buttons-response {
 	position:absolute;
-	bottom:20px;
+	bottom:-170px;
 	left: 50%;
 	margin-left: -220px;
 	z-index:5;

@@ -293,7 +293,7 @@ function show(p){
 	function startApp(){
 			showLoader(false);
 			window.setTimeout(function() {
-				$("#buttons-response").animate({"margin-top": "50px"},{duration:1000, easing:"easeOutElastic",queue:false, complete:function(){
+				$("#buttons-response").animate({"bottom": "20px"},{duration:500, easing:"easeOutElastic",queue:false, complete:function(){
 				}});
         		QUESTIONS = prepare_game_set(NB_QUESTIONS);
 				var p = get_next_question();
@@ -302,6 +302,5 @@ function show(p){
 			}, 1000);
 	};
 
-	$("#buttons-response").css("margin-top","-200px");
 
 });
