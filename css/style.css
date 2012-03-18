@@ -770,6 +770,19 @@ body {
 		-o-box-shadow: inset 4px 4px 9px 0px #f13062;
 		box-shadow: inset 4px 4px 9px 0px #f13062;
 	}
+	
+#timer {
+	position:absolute;
+	top:20px;
+	width:100%;
+	background-color:#0b202b;
+}
+	#timer span {
+		display:block;
+		background-color:#235571;
+		width:100%;
+		height:20px;
+	}
 
 /*---------------------------------------------*/
 /*---------------------------------------------*/
