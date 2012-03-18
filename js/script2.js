@@ -214,8 +214,18 @@ function show(p){
         else {
             var gagnant_id = gameFinished();
             var gagnant_name = getCandidate(gagnant_id);
-            var img = $('<div class="result_img" style="text-align:center;"><img style="margin:30px" src="img/' + getCandidate2(gagnant_id)+'.png'+'"></div>');
+
+            var img_filename;
+            if(gagnant_name)
+                img_filename = 'img/' + getCandidate2(gagnant_id)+ '.png';
+            else
+                img_filename = 'img/nadine.svg';
+
+            var img = $('<div class="result_img" style="text-align:center;"><img width="400" height="300" src="' + img_filename + '"</div>');
 		    $("body").append(img);
+
+            if(!gagnant_name)
+                gagnant_name = "MAL !";
 
             var resultat = $('<div style="" id="'+gagnant_id+'" class="result"><p style="text-align:center">'+"Vous votez : "+gagnant_name+'</p></div>');
             //	    resultat.css({left:-$(window).width()-50});
