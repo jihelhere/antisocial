@@ -112,21 +112,16 @@
   return;
   }
 
-  function show(p){
-    var proposition = $('<div id="'+p.id+'"><div style="padding:50px">'+p.text+'</div></div>');
-    proposition.css("font-size","70px");
-    proposition.css("width","100%");
-    proposition.css("line-height","70px");
-    proposition.css("margin-left","-2000px");
-    proposition.css("position","absolute");	
-    proposition.css("text-shadow","1px 1px 7px #333");	
-    proposition.css("color","#FFFFFF");		
-    proposition.attr("id",p.id);
-    
-    $("#text").html(proposition);
-      $("#"+p.id).animate({"left": "+=2000px"},{duration:1500, easing:"easeInOutElastic",queue:false, complete:function(){
-    }}).delay(1000);
-  }
+function show(p){
+	var proposition = $('<div id="'+p.id+'" class="proposition"><p>'+p.text+'</p></div>');
+	proposition.css({left:-$(window).width()-50});
+	// proposition.css('left',-$(window).width()-50);
+	$("body").append(proposition);
+
+	$("#"+p.id).animate({"left": "0"},{duration:500, queue:false, complete:function(){
+		$('buttons-response').removeClass('moving');
+	}});
+}
 
 	// $("body").append("<div class='progressbar' style='position:fixed;top:left;right:0px;width:300px;height:30px'></div>);
 	// $(".progressbar").progressbar({
@@ -150,14 +145,30 @@
   
   $('#buttons-response').show();
   
-  $("#take").click(function(){
-		hide(currentId);
-		var p = getPropos();
-		currentId = p.id;
-		show(p);		
+	$("#buttons-response:not('.moving') .button-response").click(function(event){
+		console.log("Click button : ");
+		var $this = $(this);
+		if($this.attr('id') == "take") {
+			// Incrémente la valeur du candidat X
+				// On récupère X en fonction de l'id de la proposition
+		} else {
+			// Désincrémente la valeur du candidat X
+				// Idem pour l'id
+		}
+		slide();
+		event.preventDefault();
 	});
   
-  
+	function slide() {
+		$('#buttons-response').addClass('moving');
+		$("#"+currentId).animate({"left": $(window).width()+50},{duration:200, easing:"swing",queue:false, complete:function(){
+			$(this).remove();
+			var p = getPropos();
+			show(p);
+		}});
+	}
+
+
   //---------------------
   //---------------------
   //---------------------
@@ -221,5 +232,9 @@
   // A la fin du jeu, on cherche la valeur de tab la plus grande, on prend la key correspondante
   // On utilise la fonction getCandidats pour récupérer son nom : getCandidats(key)
 
+	var pTemp = getPropos();
+	var proposition = $('<div id="'+pTemp.id+'" class="proposition"><p>'+pTemp.text+'</p></div>');
+		currentId = pTemp.id;
+	$("body").append(proposition);
 
 });
