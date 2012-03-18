@@ -79,10 +79,6 @@ $(function() {
         return res;
     }
 
-
-    // Put that in StartApp
-    QUESTIONS = prepare_game_set(20);
-
     function get_next_question()
     {
         if (inc < QUESTIONS.length)
@@ -259,8 +255,16 @@ function show(p){
 			window.setTimeout(function() {
 				$("#buttons-response").animate({"margin-top": "50px"},{duration:1000, easing:"easeOutElastic",queue:false, complete:function(){
 				}});
+
+
+                            QUESTIONS = prepare_game_set(20);
+
 				var p = getPropos();
 				show(p);
+
+                            // call get_next_question
+
+
 			}, 1000);
 	};
 
