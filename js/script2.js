@@ -221,8 +221,11 @@ function show(p){
             //	    resultat.css({left:-$(window).width()-50});
 	    // proposition.css('left',-$(window).width()-50);
 	    $("body").append(resultat);
-
-            //document.write(gagnant_name);
+            var img = $('<div class="result_img"><img id="img" src="img/' + getCandidate2(gagnant_id)+'.png'+'" style="width:0; height:0;"></div>');
+	    
+          $("body").append(img);
+      
+          $('#img').animate({height: 148, width: 264}, 4000);
         }
       }
     });
