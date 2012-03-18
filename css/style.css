@@ -715,6 +715,7 @@ body {
 	margin:0 auto;
 	left: 50%;
 	margin-left: -220px;
+	z-index:5;
 }
 
 .button-response#take {
