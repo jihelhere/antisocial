@@ -5,7 +5,7 @@ $(function() {
   var inc = 0;
   var propos_displayed = [];
   var random = 0;
-  var NB_QUESTIONS = 20;
+  var NB_QUESTIONS = 5;
   var QUESTIONS = [];
 
 
@@ -100,7 +100,18 @@ $(function() {
   }
 
   function ifTakeClicked() {
-    propos_displayed[QUESTIONS[inc-1].id]++;
+
+      console.log("inc:");
+      console.log(inc);
+
+      var str = QUESTIONS[inc-1].id
+      console.log("str:");
+      console.log(str);
+
+      if(propos_displayed[str] == null) propos_displayed[str] = 0;
+      propos_displayed[str] = propos_displayed[str] + 1;
+      console.log(propos_displayed[str]);
+
   }
 
   //---------------------
@@ -198,16 +209,16 @@ function show(p){
       $(".proposition").animate({"left": $(window).width()+50},{duration:200, easing:"swing",queue:false, complete:function(){
         $(this).remove();
         var p = get_next_question();
-        
+
         if (p)
           show(p);
         else
           game_finished();
-      
+
       }
     });
 	}
-  
+
   function game_finished() {
     $('body').empty();
   }
