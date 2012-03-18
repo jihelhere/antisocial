@@ -81,6 +81,7 @@ $(document).ready(function() {
 				// Idem pour l'id
 		}
 		slide();
+
 	});
 });
 

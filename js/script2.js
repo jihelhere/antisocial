@@ -1,4 +1,4 @@
-﻿$(function() {
+$(function() {
 
   var propos = [];
   var candis = [];
@@ -44,8 +44,7 @@
   function getRandom() { return Math.floor(Math.random()*501); }
   
   function getSentence(text) {
-    var expression = /(.*?)\./;
-    var sentences = expression.exec(text);
+    var sentences = text.split(".");
     console.log(sentences);
     var idx = Math.floor(Math.random() * sentences.length);
 
@@ -55,6 +54,7 @@
   function getPropos() {
     var random = getRandom();
     console.log(random);
+    console.log(propos.length);
     console.log(propos[random]);
     return {text: getSentence(propos[random]), id: candis[random]}; 
   }
@@ -102,7 +102,7 @@
     $(spinner.el).css("margin-top","-100px");
     $(spinner.el).css("margin-left","50%");
 
-       $(spinner.el).animate({"margin-top": "+=400px"} ,{duration:500, easing:"easeOutElastic",queue:true});
+    $(spinner.el).animate({"margin-top": "+=400px"} ,{duration:500, easing:"easeOutElastic",queue:true});
   };
 
   function hide(id){
@@ -232,6 +232,7 @@ function show(p){
   // A la fin du jeu, on cherche la valeur de tab la plus grande, on prend la key correspondante
   // On utilise la fonction getCandidats pour récupérer son nom : getCandidats(key)
 
+	
 	var pTemp = getPropos();
 	var proposition = $('<div id="'+pTemp.id+'" class="proposition"><p>'+pTemp.text+'</p></div>');
 		currentId = pTemp.id;
