@@ -30,8 +30,6 @@ $(function() {
     'jean-luc-melenchon',
     'nicolas-sarkozy'];
     
-  //var candidats_json = {"candidats": [arthaud, bayrou, cheminade, aignan, hollande, joly, lepen, melenchon, sarkozy]};
-
   var candidats = ['Nathalie Arthaud',
                    'François Bayrou',
                    'Jacques Cheminade',
@@ -54,29 +52,19 @@ $(function() {
 
     showLoader(false);
     startApp();
-    console.log(propos);
     
   }
+  
     function getRandom(size) { return Math.floor(Math.random()*size); }
 
     function getSentence(text) {
-        console.log(text);
         var sentences = text.split(".");
-        console.log(sentences);
-
-
         var idx = getRandom(sentences.length - 1) ;
-
-        console.log(sentences[idx]);
-
         return sentences[idx] + ".";
   }
 
   function getPropos() {
       random = getRandom(propos.length);
-      console.log(random);
-      console.log(propos.length);
-      console.log(propos[random]);
       return {text: getSentence(propos[random]), id: candis[random]};
   }
 
@@ -117,18 +105,9 @@ $(function() {
 
 
   function ifTakeClicked() {
-
-      // console.log("inc:");
-      // console.log(inc);
-
       var str = QUESTIONS[inc-1].id
-      // console.log("str:");
-      // console.log(str);
-
       if(propos_displayed[str] == null) propos_displayed[str] = 0;
       propos_displayed[str] = propos_displayed[str] + 1;
-//      console.log(propos_displayed[str]);
-
   }
 
   //---------------------
@@ -213,7 +192,6 @@ function show(p){
 
 	$("#buttons-response:not('.moving') .button-response").click(function(event){
 		$('#buttons-response').addClass('moving');
-		console.log("Click button : ");
 		var $this = $(this);
 		if($this.attr('id') == "take") {
 			ifTakeClicked();
@@ -248,7 +226,6 @@ function show(p){
 
     function gameFinished() {
         $('body').empty();
-        console.log(propos_displayed);
         var max_score  = 0;
         var max_id = "";
         for(var cand in propos_displayed) {
