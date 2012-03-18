@@ -9,7 +9,6 @@ $(function() {
   var QUESTIONS = [];
   var intervalSetter = 0;
 
-
   var url = 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%3D%22http%3A%2F%2Fvoxe.org%2Fapi%2Fv1%2Fpropositions%2Fsearch%3FcandidacyIds%3D4f1ec52e6e27d70001000007%2C4f1eddf96e27d7000100008b%2C4f2c143202b7400005000029%2C4f1888db5c664f0001000119%2C4f188a59f8104a0001000004%2C4f1887545c664f000100010f%2C4f1888945c664f0001000116%2C4f188a20f8104a0001000002%2C4f242b3269b233000100002b%22%20and%20itemPath%20%3D%20%22json.response.propositions%22&format=json';
 
   var id_candidacies = ['4f1ec52e6e27d70001000007',
@@ -53,7 +52,6 @@ $(function() {
     }
 
     showLoader(false);
-    startApp();
 
   }
 
@@ -191,7 +189,15 @@ function show(p){
   getJSON();
 
   $('#buttons-response').show();
-
+	
+	$('#commencer').live('click', function(event) {
+		diffBottom = $(window).height() + 20;
+		$('#splash').animate({'margin-top':'+='+diffBottom}, 300, function() {
+			$('#splash').remove();
+			startApp();
+		})
+		event.preventDefault();
+	});
 	$("#buttons-response:not('.moving') .button-response").click(function(event){
 		$('#buttons-response').addClass('moving');
 		var $this = $(this);
@@ -311,15 +317,15 @@ function show(p){
 
 	function startApp(){
 			showLoader(false);
-			window.setTimeout(function() {
+//			window.setTimeout(function() {
 				$("#buttons-response").animate({"bottom": "20px"},{duration:500, easing:"easeOutElastic",queue:false, complete:function(){
 				}});
         		QUESTIONS = prepare_game_set(NB_QUESTIONS);
 				var p = get_next_question();
 		        show(p);
-		         timer1()
+//		         timer1()
 
-			}, 1000);
+//			}, 1000);
 	};
 
 	function startTimer() {
