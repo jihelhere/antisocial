@@ -198,6 +198,7 @@ function show(p){
 		if($this.attr('id') == "take") {
 			ifTakeClicked();
 		}
+		reinitTimer();
 		slide();
 		event.preventDefault();
 	});
@@ -290,11 +291,11 @@ function show(p){
 	};
 
 	function startTimer() {
-		var timer = 2500, interval = 5;
+		var timer = 4000, interval = 5;
 		$('#timer').show();
 		intervalSetter = window.setInterval(function() {
 			timer -= interval;
-			var width = timer*100/2500;
+			var width = timer*100/4000;
 			$('#timer span').css('width', width+'%');
 			if($('#timer span').width()<=0) {
 				reinitTimer();
@@ -305,21 +306,12 @@ function show(p){
 	}
 
 	function reinitTimer() {
+		console.log("intervalSetter : ");
+		console.log(intervalSetter);
 		clearInterval(intervalSetter);
+		intervalSetter = null;
+		console.log("intervalSetter cleared : ");
+		console.log(intervalSetter);
 		$('#timer span').css('width', '100%');
-
 	}
-
-	function timer1(){
-		$("body").delay(1000).queue(function(){
-			counter--;
-			$("#counter").text = counter;
-			if (counter>0){
-				timer1();
-			}
-
-			$(this).dequeue();
-		});
-	}
-
 });
