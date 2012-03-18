@@ -139,9 +139,6 @@ function show(p){
 	// $("#progressbar .ui-progressbar-value").addClass("ui-corner-right");
 	// $("#progressbar .ui-progressbar-value").animate({width: 300}, 'slow')
 
-	$("body").css("height","100%");
-	$("body").css("overflow","hidden");
- 	$("body").css("background-color","#74C5E3");
 
 	//showLoader(true);
 	//showLoader(false);
@@ -243,7 +240,11 @@ function show(p){
 
 	function startApp(){
 			showLoader(false);
-
+			window.setTimeout(function() {
+				console.log("a : ");
+				var p = getPropos();
+				show(p);
+			}, 500);
 
 	};
 
@@ -251,10 +252,5 @@ function show(p){
 
 	};
 
-
-	var pTemp = getPropos();
-	var proposition = $('<div id="'+pTemp.id+'" class="proposition"><p>'+pTemp.text+'</p></div>');
-		currentId = pTemp.id;
-	$("body").append(proposition);
 
 });
