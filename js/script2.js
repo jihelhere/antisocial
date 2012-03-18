@@ -256,7 +256,7 @@ function show(p){
 
           $("body").append(img);
 
-          $("body").append('<a href="#" style="display: block;position: fixed;left: 50%;margin-left: -80px;bottom:20px" class="button-response" id="recommencer">Recommencez</a>');
+          $("body").append('<a href="#" style="display: block;position: fixed;left: 50%;margin-left: -92px;bottom:20px" class="button-response" id="recommencer">Recommencez</a>');
           $("#recommencer").live("click", function() {
             window.location.reload();
           });

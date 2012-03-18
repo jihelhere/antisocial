@@ -732,7 +732,7 @@ body {
 
 .proposition {
 	position:absolute;
-	margin-top:70px;
+	margin-top:50px;
 	width:100%;
 	line-height:50px;
 	text-shadow:1px 1px 3px #333;
@@ -757,7 +757,7 @@ body {
 .result p {
 	text-align:left;
 	padding:0 50px;
-	font-size:70px;
+	font-size:40px;
 	line-height:1.1em;
 }
 
