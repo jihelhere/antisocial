@@ -341,11 +341,11 @@ function show(p){
 	};
 
 	function startTimer() {
-		var timer = 7500, interval = 5;
+		var timer = 10000, interval = 5;
 		$('#timer').show();
 		intervalSetter = window.setInterval(function() {
 			timer -= interval;
-			var width = timer*100/7500;
+			var width = timer*100/10000;
 			$('#timer span').css('width', width+'%');
 			if($('#timer span').width()<=0) {
 				reinitTimer();
