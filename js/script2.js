@@ -5,7 +5,7 @@ $(function() {
   var inc = 0;
   var propos_displayed = [];
   var random = 0;
-  var NB_QUESTIONS = 10;
+  var NB_QUESTIONS = 30;
   var QUESTIONS = [];
   var intervalSetter = 0;
 
@@ -341,11 +341,11 @@ function show(p){
 	};
 
 	function startTimer() {
-		var timer = 4000, interval = 5;
+		var timer = 7500, interval = 5;
 		$('#timer').show();
 		intervalSetter = window.setInterval(function() {
 			timer -= interval;
-			var width = timer*100/4000;
+			var width = timer*100/7500;
 			$('#timer span').css('width', width+'%');
 			if($('#timer span').width()<=0) {
 				reinitTimer();
