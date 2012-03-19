@@ -5,9 +5,11 @@ $(function() {
   var inc = 0;
   var propos_displayed = [];
   var random = 0;
-  var NB_QUESTIONS = 30;
+  var NB_QUESTIONS = 27;
   var QUESTIONS = [];
   var intervalSetter = 0;
+  var timer = 8000;
+  var moving = false;
 
   var url = 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%3D%22http%3A%2F%2Fvoxe.org%2Fapi%2Fv1%2Fpropositions%2Fsearch%3FcandidacyIds%3D4f1ec52e6e27d70001000007%2C4f1eddf96e27d7000100008b%2C4f2c143202b7400005000029%2C4f1888db5c664f0001000119%2C4f188a59f8104a0001000004%2C4f1887545c664f000100010f%2C4f1888945c664f0001000116%2C4f188a20f8104a0001000002%2C4f242b3269b233000100002b%22%20and%20itemPath%20%3D%20%22json.response.propositions%22&format=json';
 
@@ -163,7 +165,7 @@ function show(p){
 	// proposition.css('left',-$(window).width()-50);
 	$("body").append(proposition);
 	$("#"+p.id).animate({"left": "0"},{duration:500, queue:false, complete:function(){
-		$('buttons-response').removeClass('moving');
+		moving = false;
 		startTimer();
 	}});
 
@@ -175,6 +177,10 @@ function show(p){
 		// });
 	// $("#progressbar .ui-progressbar-value").addClass("ui-corner-right");
 	// $("#progressbar .ui-progressbar-value").animate({width: 300}, 'slow')
+
+
+	$("body").css("height","100%");
+	$("body").css("overflow","hidden");
 	//showLoader(true);
 	//showLoader(false);
 
@@ -185,7 +191,7 @@ function show(p){
   getJSON();
 
   $('#buttons-response').show();
-
+	
 	$('#commencer').live('click', function(event) {
 		diffBottom = $(window).height() + 20;
 		$('#splash').animate({'margin-top':'+='+diffBottom}, 300, function() {
@@ -194,18 +200,20 @@ function show(p){
 		})
 		event.preventDefault();
 	});
-	$("#buttons-response:not('.moving') .button-response").click(function(event){
-		$('#buttons-response').addClass('moving');
-		var $this = $(this);
-		if($this.attr('id') == "take") {
-			ifTakeClicked();
+	$("#buttons-response .button-response").live('click',function(event){
+		if (moving == false) {
+			slide();
+			var $this = $(this);
+			if($this.attr('id') == "take") {
+				ifTakeClicked();
+			}
+			reinitTimer();
+			event.preventDefault();
 		}
-		reinitTimer();
-		slide();
-		event.preventDefault();
 	});
 
 	function slide() {
+		moving = true;
       $(".proposition").animate({"left": $(window).width()+50},{duration:200, easing:"swing",queue:false, complete:function(){
         $(this).remove();
         var p = get_next_question();
@@ -253,10 +261,6 @@ function show(p){
           $("body").append(img);
 
           $("body").append('<a href="#" style="display: block;position: fixed;left: 50%;margin-left: -92px;bottom:20px" class="button-response" id="recommencer">Recommencez</a>');
-
-            //analysis();
-
-
           $("#recommencer").live("click", function() {
             window.location.reload();
           });
@@ -278,18 +282,6 @@ function show(p){
         }
         return max_id;
     }
-
-    function analysis()
-    {
-        for(var i = 0; i < QUESTIONS.length; i++)
-        {
-            var resultat = $('<div class="analysis"><p style="text-align:center">'+ "Q"+i+" "+ getCandidate(QUESTIONS[i].id)  + '</p></div>');
-            //	    resultat.css({left:-$(window).width()-50});
-	    // proposition.css('left',-$(window).width()-50);
-	    $("body").append(resultat);
-        }
-    }
-
 
 
   //---------------------
@@ -341,11 +333,11 @@ function show(p){
 	};
 
 	function startTimer() {
-		var timer = 10000, interval = 5;
+		var tps = timer, interval = 10;
 		$('#timer').show();
 		intervalSetter = window.setInterval(function() {
-			timer -= interval;
-			var width = timer*100/10000;
+			tps -= interval;
+			var width = tps*100/timer;
 			$('#timer span').css('width', width+'%');
 			if($('#timer span').width()<=0) {
 				reinitTimer();
