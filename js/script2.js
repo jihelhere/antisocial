@@ -5,9 +5,11 @@ $(function() {
   var inc = 0;
   var propos_displayed = [];
   var random = 0;
-  var NB_QUESTIONS = 5;
+  var NB_QUESTIONS = 27;
   var QUESTIONS = [];
   var intervalSetter = 0;
+  var timer = 8000;
+  var moving = false;
 
   var id_candidacies = ['4f1ec52e6e27d70001000007',
     '4f1eddf96e27d7000100008b',
@@ -140,7 +142,7 @@ $(function() {
     proposition.css({left:-$(window).width()-50});
     $("body").append(proposition);
     $("#"+p.id).animate({"left": "0"},{duration:500, queue:false, complete:function(){
-      $('buttons-response').removeClass('moving');
+      moving = false;
       startTimer();
     }});
   }
@@ -165,19 +167,21 @@ $(function() {
 		})
 		event.preventDefault();
 	});
-  
-	$("#buttons-response:not('.moving') .button-response").click(function(event){
-		$('#buttons-response').addClass('moving');
-		var $this = $(this);
-		if($this.attr('id') == "take") {
-			ifTakeClicked();
+
+	$("#buttons-response .button-response").live('click',function(event){
+		if (!moving) {
+			slide();
+			var $this = $(this);
+			if ($this.attr('id') == "take") {
+				ifTakeClicked();
+			}
+			reinitTimer();
+			event.preventDefault();
 		}
-		reinitTimer();
-		slide();
-		event.preventDefault();
 	});
 
 	function slide() {
+    moving = true;
     $(".proposition").animate(
       {"left": $(window).width()+50},
       {duration: 200, easing: "swing", queue: false, complete: function() {
@@ -266,11 +270,11 @@ $(function() {
 	};
 
 	function startTimer() {
-		var timer = 4000, interval = 5;
+		var tps = timer, interval = 10;
 		$('#timer').show();
 		intervalSetter = window.setInterval(function() {
-			timer -= interval;
-			var width = timer*100/4000;
+			tps -= interval;
+			var width = tps*100/timer;
 			$('#timer span').css('width', width+'%');
 			if($('#timer span').width()<=0) {
 				reinitTimer();
