@@ -23,10 +23,10 @@ $(function() {
   ];
 
   var candidats = ['Nathalie Arthaud',
-    'François Bayrou',
+    'Francois Bayrou',
     'Jacques Cheminade',
     'Nicolas Dupont-Aignan',
-    'François Hollande',
+    'Francois Hollande',
     'Eva Joly',
     'Marine Le Pen',
     'Jean-Luc Melenchon',
