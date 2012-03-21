@@ -5,13 +5,14 @@ $(function() {
   var inc = 0;
   var propos_displayed = [];
   var random = 0;
-  var NB_QUESTIONS = 27;
+  var NB_QUESTIONS = 5
   var QUESTIONS = [];
   var intervalSetter = 0;
   var timer = 8000;
   var moving = false;
 
-  var id_candidacies = ['4f1ec52e6e27d70001000007',
+  var id_candidacies = [
+    '4f1ec52e6e27d70001000007',
     '4f1eddf96e27d7000100008b',
     '4f2c143202b7400005000029',
     '4f1888db5c664f0001000119',
@@ -22,7 +23,8 @@ $(function() {
     '4f242b3269b233000100002b'
   ];
 
-  var candidats = ['Nathalie Arthaud',
+  var candidats = [
+    'Nathalie Arthaud',
     'Francois Bayrou',
     'Jacques Cheminade',
     'Nicolas Dupont-Aignan',
@@ -32,6 +34,25 @@ $(function() {
     'Jean-Luc Melenchon',
     'Nicolas Sarkozy'
   ];
+  
+  function preloadImage(arrayOfImages) {
+    $(arrayOfImages).each(function() {
+        $('<img/>')[0].src = this;
+    });
+  }
+
+  preloadImage([
+    'img/Nathalie Arthaud.png',
+    'img/Francois Bayrou.png',
+    'img/Jacques Cheminade.png',
+    'img/Nicolas Dupont-Aignan.png',
+    'img/Francois Hollande.png',
+    'img/Eva Joly.png',
+    'img/Marine Le Pen.png',
+    'img/Jean-Luc Melenchon.png',
+    'img/Nicolas Sarkozy.png',
+    'img/nadine.png'
+  ]);
   
   function getJSON() {
     showLoader(true);
@@ -196,45 +217,33 @@ $(function() {
           var gagnant_name = getCandidate(gagnant_id);
           var answer;
           
-          if (!gagnant_name)
-              answer = "";
-          else
-              answer = "Votre vote instinctif";
+          answer = (!gagnant_name) ? '' : 'Votre vote instinctif';
 
           resultat = $('<div style="margin-top:50px;" id="'+gagnant_id+'" class="result"><p style="text-align:center">'+ answer + '</p></div>');
-          $("body").append(resultat);
+          
+          $('body').append(resultat);
 
           var img_filename;
           
-          if (gagnant_name)
-              img_filename = 'img/' + getCandidate(gagnant_id)+ '.png';
-          else
-              img_filename = 'img/nadine.png';
+          img_filename = (gagnant_name) ? 'img/' + getCandidate(gagnant_id) + '.png' : 'img/nadine.png';
 
           var img = $('<div class="result_img" style="text-align:center;margin-top:20px"><img width="300" height="200" src="' + img_filename + '" /></div>');
 
-          $("body").append(img);
+          $('body').append(img);
 
           var answer;
-          if (!gagnant_name)
-              answer = "Le 22 avril, restez chez vous !";
-          else
-              answer = gagnant_name;
+          
+           answer = (!gagnant_name) ? 'Le 22 avril, restez chez vous !' : gagnant_name;
 
           resultat = $('<div style="" id="'+gagnant_id+'" class="result"><p style="text-align:center">'+ answer + '</p></div>');
 
-          $("body").append(resultat);
+          $('body').append(resultat);
 
-          var img = $('<div class="result_img"><img id="img" src="img/' + getCandidate(gagnant_id)+'.png'+'" style="width:0; height:0;"></div>');
-
-          $("body").append(img);
-
-          $("body").append('<a href="#" style="display: block;position: fixed;left: 50%;margin-left: -92px;bottom:20px" class="button-response" id="recommencer">Recommencez</a>');
+          $('body').append('<a href="#" style="display: block;position: fixed;left: 50%;margin-left: -92px;bottom:20px" class="button-response" id="recommencer">Recommencez</a>');
         
-          $("#recommencer").live("click", function() {
+          $('#recommencer').live('click', function() {
             window.location.reload();
           });
-
         }
       }
     });
