@@ -5,7 +5,7 @@ $(function() {
   var inc = 0;
   var propos_displayed = [];
   var random = 0;
-  var NB_QUESTIONS = 5
+  var NB_QUESTIONS = 27;
   var QUESTIONS = [];
   var intervalSetter = 0;
   var timer = 8000;
@@ -81,11 +81,14 @@ $(function() {
     return {text: getSentence(propos[random]), id: candis[random]};
   }
 
-
   function prepare_game_set(size) {
     var res = [];
     for (var i = 0; i < size; i++) {
-      res.push(getPropos());
+      var propos = getPropos();
+      while (propos.text.length < 10) {
+        propos = getPropos();
+      }
+        res.push(propos);
     }
     return res;
   }
@@ -167,9 +170,6 @@ $(function() {
       startTimer();
     }});
   }
-
-	$("body").css("height","100%");
-	$("body").css("overflow","hidden");
 
   //---------------------
   //---------------------
