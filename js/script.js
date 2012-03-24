@@ -1,58 +1,52 @@
 $(function() {
 
-  var propos = [];
-  var candis = [];
-  var inc = 0;
-  var propos_displayed = [];
-  var random = 0;
-  var NB_QUESTIONS = 27;
-  var QUESTIONS = [];
-  var intervalSetter = 0;
-  var timer = 8000;
-  var moving = false;
+  //---------------------
+  //----DECLARATIONS-----
+  //---------------------
 
-  var id_candidacies = [
-    '4f1ec52e6e27d70001000007',
-    '4f1eddf96e27d7000100008b',
-    '4f2c143202b7400005000029',
-    '4f1888db5c664f0001000119',
-    '4f188a59f8104a0001000004',
-    '4f1887545c664f000100010f',
-    '4f1888945c664f0001000116',
-    '4f188a20f8104a0001000002',
-    '4f242b3269b233000100002b'
-  ];
-
-  var candidats = [
-    'Nathalie Arthaud',
-    'Francois Bayrou',
-    'Jacques Cheminade',
-    'Nicolas Dupont-Aignan',
-    'Francois Hollande',
-    'Eva Joly',
-    'Marine Le Pen',
-    'Jean-Luc Melenchon',
-    'Nicolas Sarkozy'
-  ];
+  var inc = 0,
+    random = 0,
+    NB_QUESTIONS = 1000, //27
+    intervalSetter = 0,
+    timer = 8000,
+    moving = false,
+    gameContinue = true,
+    propos = [],
+    candis = [],
+    propos_displayed = [],
+    QUESTIONS = [],
+    id_candidacies = [
+      '4f1ec52e6e27d70001000007',
+      '4f1eddf96e27d7000100008b',
+      '4f2c143202b7400005000029',
+      '4f1888db5c664f0001000119',
+      '4f188a59f8104a0001000004',
+      '4f1887545c664f000100010f',
+      '4f1888945c664f0001000116',
+      '4f188a20f8104a0001000002',
+      '4f242b3269b233000100002b'
+    ],
+    candidats = [
+      'Nathalie Arthaud',
+      'Francois Bayrou',
+      'Jacques Cheminade',
+      'Nicolas Dupont-Aignan',
+      'Francois Hollande',
+      'Eva Joly',
+      'Marine Le Pen',
+      'Jean-Luc Melenchon',
+      'Nicolas Sarkozy'
+    ];
+  
+  //---------------------
+  //-----FONCTIONS-------
+  //---------------------
   
   function preloadImage(arrayOfImages) {
     $(arrayOfImages).each(function() {
         $('<img/>')[0].src = this;
     });
   }
-
-  preloadImage([
-    'img/Nathalie Arthaud.png',
-    'img/Francois Bayrou.png',
-    'img/Jacques Cheminade.png',
-    'img/Nicolas Dupont-Aignan.png',
-    'img/Francois Hollande.png',
-    'img/Eva Joly.png',
-    'img/Marine Le Pen.png',
-    'img/Jean-Luc Melenchon.png',
-    'img/Nicolas Sarkozy.png',
-    'img/nadine.png'
-  ]);
   
   function getJSON() {
     showLoader(true);
@@ -93,8 +87,11 @@ $(function() {
   }
 
   function get_next_question() {
-      if (inc < QUESTIONS.length)
-          return QUESTIONS[inc++];
+      if (inc < QUESTIONS.length) {
+          inc++;
+          if (inc == 11) $('#stop').show();
+          return QUESTIONS[inc];
+      }
       else {
           inc = 0;
           return null;
@@ -112,10 +109,6 @@ $(function() {
       if(propos_displayed[str] == null) propos_displayed[str] = 0;
       propos_displayed[str] = propos_displayed[str] + 1;
   }
-
-  //---------------------
-  //---------------------
-  //---------------------
 
   function showLoader(show) {
     if (!show) {
@@ -170,35 +163,6 @@ $(function() {
     }});
   }
 
-  //---------------------
-  //---------------------
-  //---------------------
-  
-  getJSON();
-
-  $('#buttons-response').show();
-	
-	$('#commencer').live('click', function(event) {
-		diffBottom = $(window).height() + 20;
-		$('#splash').animate({'margin-top':'+='+diffBottom}, 300, function() {
-			$('#splash').remove();
-			startApp();
-		})
-		event.preventDefault();
-	});
-
-	$("#buttons-response .button-response").live('click',function(event){
-		if (!moving) {
-			slide();
-			var $this = $(this);
-			if ($this.attr('id') == "take") {
-				ifTakeClicked();
-			}
-			reinitTimer();
-			event.preventDefault();
-		}
-	});
-
 	function slide() {
     moving = true;
     $(".proposition").animate(
@@ -208,40 +172,10 @@ $(function() {
         
         var p = get_next_question();
         
-        if (p)
+        if (p && gameContinue)
           show(p);
         else {
-          var gagnant_id = gameFinished();
-          var gagnant_name = getCandidate(gagnant_id);
-          var answer;
-          
-          answer = (!gagnant_name) ? '' : 'Votre vote instinctif';
-
-          resultat = $('<div style="margin-top:50px;" id="'+gagnant_id+'" class="result"><p style="text-align:center">'+ answer + '</p></div>');
-          
-          $('body').append(resultat);
-
-          var img_filename;
-          
-          img_filename = (gagnant_name) ? 'img/' + getCandidate(gagnant_id) + '.png' : 'img/nadine.png';
-
-          var img = $('<div class="result_img" style="text-align:center;margin-top:20px"><img width="300" height="200" src="' + img_filename + '" /></div>');
-
-          $('body').append(img);
-
-          var answer;
-          
-           answer = (!gagnant_name) ? 'Le 22 avril, restez chez vous !' : gagnant_name;
-
-          resultat = $('<div style="" id="'+gagnant_id+'" class="result"><p style="text-align:center">'+ answer + '</p></div>');
-
-          $('body').append(resultat);
-
-          $('body').append('<a href="#" style="display: block;position: fixed;left: 50%;margin-left: -92px;bottom:20px" class="button-response" id="recommencer">Recommencez</a>');
-        
-          $('#recommencer').live('click', function() {
-            window.location.reload();
-          });
+          displayEndGame();
         }
       }
     });
@@ -259,10 +193,6 @@ $(function() {
       }
       return max_id;
   }
-
-  //---------------------
-  //---------------------
-  //---------------------
 
 	function startApp() {
     showLoader(false);
@@ -300,5 +230,88 @@ $(function() {
 		console.log(intervalSetter);
 		$('#timer span').css('width', '100%');
 	}
+  
+  function displayEndGame() {
+    var gagnant_id = gameFinished();
+    var gagnant_name = getCandidate(gagnant_id);
+    var answer;
+    
+    answer = (!gagnant_name) ? '' : 'Votre vote instinctif';
+
+    resultat = $('<div style="margin-top:50px;" id="'+gagnant_id+'" class="result"><p style="text-align:center">'+ answer + '</p></div>');
+    
+    $('body').append(resultat);
+
+    var img_filename;
+    
+    img_filename = (gagnant_name) ? 'img/' + getCandidate(gagnant_id) + '.png' : 'img/nadine.png';
+
+    var img = $('<div class="result_img" style="text-align:center;margin-top:20px"><img width="300" height="200" src="' + img_filename + '" /></div>');
+
+    $('body').append(img);
+
+    var answer;
+    
+     answer = (!gagnant_name) ? 'Le 22 avril, restez chez vous !' : gagnant_name;
+
+    resultat = $('<div style="" id="'+gagnant_id+'" class="result"><p style="text-align:center">'+ answer + '</p></div>');
+
+    $('body').append(resultat);
+
+    $('body').append('<a href="#" style="display: block;position: fixed;left: 50%;margin-left: -92px;bottom:20px" class="button-response" id="recommencer">Recommencez</a>');
+  
+    $('#recommencer').live('click', function() {
+      window.location.reload();
+    });
+  }
+  
+  //---------------------
+  //--------MAIN---------
+  //---------------------
+  
+  preloadImage([
+    'img/Nathalie Arthaud.png',
+    'img/Francois Bayrou.png',
+    'img/Jacques Cheminade.png',
+    'img/Nicolas Dupont-Aignan.png',
+    'img/Francois Hollande.png',
+    'img/Eva Joly.png',
+    'img/Marine Le Pen.png',
+    'img/Jean-Luc Melenchon.png',
+    'img/Nicolas Sarkozy.png',
+    'img/nadine.png'
+  ]);
+  
+  getJSON();
+
+  $('#buttons-response').show();
+	
+	$('#commencer').live('click', function(event) {
+    event.preventDefault();
+		diffBottom = $(window).height() + 20;
+    
+		$('#splash').animate({'margin-top':'+='+diffBottom}, 300, function() {
+			$('#splash').remove();
+			startApp();
+		})
+	});
+
+	$('#take, #no-take').live('click', function(event){
+    event.preventDefault();
+		if (!moving) {
+			slide();
+			var $this = $(this);
+			if ($this.attr('id') == "take") {
+				ifTakeClicked();
+			}
+			reinitTimer();
+		}
+	});
+  
+  $('#stop').click(function() {
+    event.preventDefault();
+    gameContinue = false;
+    displayEndGame();
+  });
   
 });

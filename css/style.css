@@ -807,7 +807,23 @@ body {
 		-o-box-shadow: inset 4px 4px 9px 0px #f13062;
 		box-shadow: inset 4px 4px 9px 0px #f13062;
 	}
-
+  
+  #stop {
+    display: none;
+    bottom: 120px;
+    left: 20px;
+    width: 400px;
+    line-height: 40px;
+    background: #FAA732;
+  }
+  
+  #stop:hover {
+    -moz-box-shadow: inset 4px 4px 9px 0px #DB8206;
+		-webkit-box-shadow: inset 4px 4px 9px 0px #DB8206;
+		-o-box-shadow: inset 4px 4px 9px 0px #DB8206;
+		box-shadow: inset 4px 4px 9px 0px #DB8206;
+  }
+  
 #timer {
 	display:none;
 	position:absolute;
