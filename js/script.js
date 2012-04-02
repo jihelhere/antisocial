@@ -196,8 +196,9 @@ $(function() {
 
 	function startApp() {
     showLoader(false);
+    $('#author').hide();
     $("#buttons-response").animate(
-      {"bottom": "20px"},
+      {"bottom": "60px"},
       {duration:500, easing: "easeOutElastic", queue: false}
     );
     
