@@ -208,7 +208,7 @@ $(function() {
 	};
 
 	function startTimer() {
-		var tps = timer, interval = 10;
+		var tps = timer, interval = 5;
 		$('#timer').show();
 		intervalSetter = window.setInterval(function() {
 			tps -= interval;
