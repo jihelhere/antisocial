@@ -309,7 +309,7 @@ $(function() {
 		}
 	});
   
-  $('#stop').click(function() {
+  $('#stop').click(function(event) {
     event.preventDefault();
     gameContinue = false;
     displayEndGame();
